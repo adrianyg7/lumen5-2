@@ -1,0 +1,312 @@
+{
+    "baseUrl": "http://tacoscallejeros.com",
+    "routes": [
+        {
+            "endpoint": "POST /login",
+            "params": [
+                {
+                    "param": "email",
+                    "validation": "required|email"
+                },
+                {
+                    "param": "password",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "service",
+                    "validation": "required|in:apns,gcm,web"
+                },
+                {
+                    "param": "device_uuid",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "device_token",
+                    "validation": "required|string"
+                }
+            ],
+            "success": {
+                "api_token": "0zyIugGJulCh4GV5cp9SwDy6ZUsRCb8TWvkVWCLyrib7gaMiecco2YG2ddDx"
+            },
+            "errors": [
+                {
+                    "status": 401,
+                    "reason": "Invalid login"
+                },
+                {
+                    "status": 422,
+                    "reason": "Input validation error"
+                },
+                {
+                    "status": 428,
+                    "reason": "Account not verified"
+                }
+            ]
+        },
+        {
+            "endpoint": "POST /logout",
+            "params": [
+                {
+                    "param": "api_token",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "device_uuid",
+                    "validation": "required|string"
+                }
+            ],
+            "success": {},
+            "errors": []
+        },
+        {
+            "endpoint": "POST /register",
+            "params": [
+                {
+                    "param": "first_name",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "last_name",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "email",
+                    "validation": "required|email|unique:users"
+                },
+                {
+                    "param": "password",
+                    "validation": "required|string|min:4"
+                }
+            ],
+            "success": {},
+            "errors": [
+                {
+                    "status": 422,
+                    "reason": "Input validation error"
+                }
+            ]
+        },
+        {
+            "endpoint": "POST /verify-account",
+            "params": [
+                {
+                    "param": "token",
+                    "validation": "required|string"
+                }
+            ],
+            "success": {},
+            "errors": [
+                {
+                    "status": 422,
+                    "reason": "Input validation error"
+                }
+            ]
+        },
+        {
+            "endpoint": "POST /resend-verification-mail",
+            "params": [
+                {
+                    "param": "email",
+                    "validation": "required|email"
+                }
+            ],
+            "success": {},
+            "errors": [
+                {
+                    "status": 422,
+                    "reason": "Input validation error"
+                }
+            ]
+        },
+        {
+            "endpoint": "POST /password/email",
+            "params": [
+                {
+                    "param": "email",
+                    "validation": "required|email"
+                }
+            ],
+            "success": {},
+            "errors": [
+                {
+                    "status": 422,
+                    "reason": "Input validation error"
+                }
+            ]
+        },
+        {
+            "endpoint": "POST /password/reset",
+            "params": [
+                {
+                    "param": "token",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "password",
+                    "validation": "required|string|min:6"
+                }
+            ],
+            "success": {},
+            "errors": [
+                {
+                    "status": 422,
+                    "reason": "Input validation error"
+                }
+            ]
+        },
+        {
+            "endpoint": "GET /users",
+            "params": [
+                {
+                    "param": "api_token",
+                    "validation": "required|string"
+                }
+            ],
+            "success": {
+                "users": [
+                    {
+                        "id": 2,
+                        "first_name": "Ms. Madalyn Grady V",
+                        "last_name": "Prof. Citlalli Altenwerth",
+                        "email": "ilebsack@larkin.biz"
+                    }
+                ],
+            },
+            "errors": [
+                {
+                    "status": 401,
+                    "reason": "Invalid token."
+                }
+            ]
+        },
+        {
+            "endpoint": "POST /users",
+            "params": [
+                {
+                    "param": "api_token",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "first_name",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "last_name",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "email",
+                    "validation": "required|email|unique:users"
+                },
+                {
+                    "param": "password",
+                    "validation": "required|string|min:4"
+                }
+            ],
+            "success": {
+                "user": {
+                    "id": 2,
+                    "first_name": "Ms. Madalyn Grady V",
+                    "last_name": "Prof. Citlalli Altenwerth",
+                    "email": "ilebsack@larkin.biz"
+                }
+            },
+            "errors": [
+                {
+                    "status": 401,
+                    "reason": "Invalid token."
+                },
+                {
+                    "status": 422,
+                    "reason": "Input validation error"
+                }
+            ]
+        },
+        {
+            "endpoint": "GET /users/{id}",
+            "params": [
+                {
+                    "param": "api_token",
+                    "validation": "required|string"
+                }
+            ],
+            "success": {
+                "user": {
+                    "id": 2,
+                    "first_name": "Ms. Madalyn Grady V",
+                    "last_name": "Prof. Citlalli Altenwerth",
+                    "email": "ilebsack@larkin.biz"
+                }
+            },
+            "errors": [
+                {
+                    "status": 401,
+                    "reason": "Invalid token."
+                },
+                {
+                    "status": 404,
+                    "reason": "User not found"
+                }
+            ]
+        },
+        {
+            "endpoint": "POST /users/{id}",
+            "params": [
+                {
+                    "param": "api_token",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "first_name",
+                    "validation": "required|string"
+                },
+                {
+                    "param": "last_name",
+                    "validation": "required|string"
+                }
+            ],
+            "success": {
+                "user": {
+                    "id": 2,
+                    "first_name": "Ms. Madalyn Grady V",
+                    "last_name": "Prof. Citlalli Altenwerth",
+                    "email": "ilebsack@larkin.biz"
+                }
+            },
+            "errors": [
+                {
+                    "status": 401,
+                    "reason": "Invalid token."
+                },
+                {
+                    "status": 404,
+                    "reason": "User not found"
+                },
+                {
+                    "status": 422,
+                    "reason": "Input validation error"
+                }
+            ]
+        },
+        {
+            "endpoint": "POST /users/{id}/destroy",
+            "params": [
+                {
+                    "param": "api_token",
+                    "validation": "required|string"
+                }
+            ],
+            "success": {},
+            "errors": [
+                {
+                    "status": 401,
+                    "reason": "Invalid token."
+                },
+                {
+                    "status": 404,
+                    "reason": "User not found"
+                }
+            ]
+        }
+    ]
+}
